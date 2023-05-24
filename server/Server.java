@@ -17,7 +17,7 @@ public class Server {
                 jogo.start();
             }
         } catch (Exception e) {
-            System.out.println("Error: " + e.getMessage());
+            System.out.println("Erro ao bindar com o cliente: " + e.getMessage());
         }
     }
 }

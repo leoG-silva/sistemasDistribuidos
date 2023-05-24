@@ -24,60 +24,60 @@ public class Client {
         System.out.println("O jogo está sendo carregado...");
 
         try {
-          Thread.sleep(2 * 1000);
+          Thread.sleep(2000);
         } catch (InterruptedException e) {}
 
         System.out.println("Carregamento concluído.\r\n");
 
         try {
-          Thread.sleep(2 * 1000);
+          Thread.sleep(1000);
         } catch (InterruptedException e) {}
 
-        while (!mensagem.equals("Sair")) {
+        do {
           System.out.println("Escolha uma opção para seu jogo");
-          System.out.println("1 -Jogador x Servidor");
-          System.out.println("2 -Jogador x Jogador");
-          System.out.println("Sair - Sair do jogo");
+          System.out.println("1 - Jogador x Servidor");
+          System.out.println("2 - Jogador x Jogador");
+          System.out.println("Exit - Sair do jogo");
 
           mensagem = teclado.nextLine();
           printStream.println(mensagem);
 
+         
           switch (mensagem) {
             case "1":
-              //return threadJogoVSServidor
-
+              //return executarJogoVersusServidor()
               break;
             case "2":
-              //return threadJogoVSjogador
-
+              //return executarJogoVersusClient()
               break;
-            case "sair":
-              System.out.println("Saindo do jogo....");
 
-              try {
-                Thread.sleep(2 * 1000);/* 2 segundos de load */
-              } catch (InterruptedException e) {}
-
+            case "exit":
               break;
+
+            case "Exit":
+              break;
+
             default:
-              System.out.println("Opção invalida... ");
+              System.out.println("Opção invalida... \r\n");
 
               try {
-                Thread.sleep(2 * 1000);/* 2 segundos de load */
+                Thread.sleep(2000);
               } catch (InterruptedException e) {}
 
               break;
           }
-        }
+        } while (!mensagem.equalsIgnoreCase("Exit"));
       } catch (Exception e) {
         System.out.println("Erro ao executar o menu do jogo...");
       }
+
+      System.out.println("Saindo do jogo....");
 
       scanner.close();
       teclado.close();
       socket.close();
     } catch (Exception e) {
-      System.out.println("Error: " + e.getMessage());
+      System.out.println("Error ao bindar com o servidor: " + e.getMessage());
     }
   }
 }
