@@ -1,6 +1,6 @@
 package client;
 
-import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -11,14 +11,14 @@ public class Client {
   public static void main(String[] args) {
     Socket socket;
     Scanner scanner, teclado;
-    PrintStream printStream;
+    PrintWriter printWriter;
     String mensagem = "";
     final String HOST = "localhost";
     final int PORT = 12345;
 
     try {
       socket = new Socket(HOST, PORT);
-      printStream = new PrintStream(socket.getOutputStream());
+      printWriter = new PrintWriter(socket.getOutputStream(), true);
       scanner = new Scanner(socket.getInputStream());
       teclado = new Scanner(System.in);
 
@@ -43,9 +43,9 @@ public class Client {
           System.out.println("Sair - Sair do jogo");
 
           mensagem = teclado.nextLine();
-          printStream.println(mensagem);
+          printWriter.println(mensagem);
 
-          switch (mensagem) {
+          switch (mensagem.toUpperCase()) {
             case "1":
               JogoVersusServidor jogoVersusServidor = new JogoVersusServidor();
               jogoVersusServidor.executarjogo(socket);
@@ -54,8 +54,7 @@ public class Client {
               //return executarJogoVersusClient()
               break;
 
-            case "Sair":
-            case "sair":
+            case "SAIR":
               break;
 
             default:
@@ -67,7 +66,7 @@ public class Client {
 
               break;
           }
-        } while (!mensagem.equalsIgnoreCase("Sair"));
+        } while (!mensagem.equalsIgnoreCase("SAIR"));
       } catch (Exception e) {
         System.out.println("Erro ao executar o menu do jogo...");
       }

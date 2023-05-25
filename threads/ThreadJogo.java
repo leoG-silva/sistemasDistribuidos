@@ -1,6 +1,6 @@
 package threads;
 
-import java.io.PrintStream;
+import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
@@ -10,7 +10,7 @@ public class ThreadJogo extends Thread {
 
   private Socket client;
   Scanner scanner;
-  PrintStream printStream;
+  PrintWriter printWriter;
   String msg = "";
 
   public ThreadJogo(Socket client) {
@@ -23,14 +23,14 @@ public class ThreadJogo extends Thread {
       System.out.println(
         "Conectado ao endereço " + client.getInetAddress().getHostAddress()
       );
-      System.out.println("\r\n Conectado a porta " + client.getPort());
+      System.out.println("\r\n Conectado a porta " + client.getLocalPort());
     } catch (Exception e) {
       System.out.println("Error on thread: " + e.getMessage());
     }
 
     try {
       scanner = new Scanner(client.getInputStream());
-      printStream = new PrintStream(client.getOutputStream());
+      printWriter = new PrintWriter(client.getOutputStream(), true);
 
       System.out.println("O servidor está sendo carregado...");
 
@@ -70,7 +70,7 @@ public class ThreadJogo extends Thread {
         client.getInetAddress().getHostAddress()
       );      
       scanner.close();
-      printStream.close();
+      printWriter.close();
       client.close();
     } catch (Exception e) {
       System.out.println("Erro ao fechar as conexões");
