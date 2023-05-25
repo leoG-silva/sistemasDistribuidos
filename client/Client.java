@@ -4,6 +4,8 @@ import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
 
+import util.client.JogoVersusServidor;
+
 public class Client {
 
   public static void main(String[] args) {
@@ -30,31 +32,30 @@ public class Client {
         System.out.println("Carregamento concluído.\r\n");
 
         try {
-          Thread.sleep(1000);
+          Thread.sleep(2000);
         } catch (InterruptedException e) {}
 
         do {
+          System.out.println("***BEM VINDO AO JOGO DE PAR OU IMPAR ***");
           System.out.println("Escolha uma opção para seu jogo");
           System.out.println("1 - Jogador x Servidor");
           System.out.println("2 - Jogador x Jogador");
-          System.out.println("Exit - Sair do jogo");
+          System.out.println("Sair - Sair do jogo");
 
           mensagem = teclado.nextLine();
           printStream.println(mensagem);
 
-         
           switch (mensagem) {
             case "1":
-              //return executarJogoVersusServidor()
+              JogoVersusServidor jogoVersusServidor = new JogoVersusServidor();
+              jogoVersusServidor.executarjogo(socket);
               break;
             case "2":
               //return executarJogoVersusClient()
               break;
 
-            case "exit":
-              break;
-
-            case "Exit":
+            case "Sair":
+            case "sair":
               break;
 
             default:
@@ -66,16 +67,26 @@ public class Client {
 
               break;
           }
-        } while (!mensagem.equalsIgnoreCase("Exit"));
+        } while (!mensagem.equalsIgnoreCase("Sair"));
       } catch (Exception e) {
         System.out.println("Erro ao executar o menu do jogo...");
       }
 
       System.out.println("Saindo do jogo....");
 
-      scanner.close();
-      teclado.close();
-      socket.close();
+      try {
+        System.out.println("Fechando conexão");
+
+        scanner.close();
+        teclado.close();
+        socket.close();
+
+        System.out.println("Conexões fechadas.");
+      } catch (Exception e) {
+        System.out.println("Erro ao fechar conexão");
+      }
+
+
     } catch (Exception e) {
       System.out.println("Error ao bindar com o servidor: " + e.getMessage());
     }

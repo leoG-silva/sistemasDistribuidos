@@ -1,6 +1,8 @@
 package server;
 import java.net.*;
 
+import threads.ThreadJogo;
+
 public class Server {
     public static void main(String[] args) {
         ServerSocket server;

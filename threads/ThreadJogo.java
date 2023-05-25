@@ -1,8 +1,10 @@
-package server;
+package threads;
 
 import java.io.PrintStream;
 import java.net.Socket;
 import java.util.Scanner;
+
+import util.server.JogoServidor;
 
 public class ThreadJogo extends Thread {
 
@@ -36,26 +38,30 @@ public class ThreadJogo extends Thread {
         Thread.sleep(2000);
       } catch (InterruptedException e) {}
 
-      System.out.println("Jogo carregador. \r\n");
+      System.out.println("Jogo carregado. \r\n");
 
       try {
         Thread.sleep(2000);
       } catch (InterruptedException e) {}
 
-      while (!msg.equalsIgnoreCase("Exit")) {
+      while (!msg.equalsIgnoreCase("Sair")) {
         msg = scanner.nextLine();
         if (msg.equalsIgnoreCase("1")) {
           System.out.println("O jogador escolheu a opção Jogador x Servidor");
+          JogoServidor jogoVsServidor = new JogoServidor(client);
+          jogoVsServidor.executarJogoVersusServidor();
         }
-        if (msg.equalsIgnoreCase("2")) {
+          if (msg.equalsIgnoreCase("2")) {
           System.out.println("O jogador escolheu a opção Jogador x Jogador");
+        }
+
+        if (msg.equalsIgnoreCase("Sair")){
+          System.out.println("O jogador escolheu sair do jogo...");
         }
       }
     } catch (Exception e) {
       System.out.println("Erro na comunicação com o servidor");
     }
-
-    System.out.println("O jogador escolheu sair do jogo...");
 
     //etapa de encerramento
     try {
