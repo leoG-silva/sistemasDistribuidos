@@ -36,7 +36,7 @@ public class Client {
         } catch (InterruptedException e) {}
 
         do {
-          System.out.println("***BEM VINDO AO JOGO DE PAR OU IMPAR ***");
+          System.out.println("*** BEM VINDO AO JOGO DE PAR OU IMPAR ***");
           System.out.println("Escolha uma opção para seu jogo");
           System.out.println("1 - Jogador x Servidor");
           System.out.println("2 - Jogador x Jogador");

@@ -14,7 +14,8 @@ public class JogoVersusServidor {
   PrintWriter printWriter;
   String mensagem = "";
   String resultadoJogo = "";
-  int numeroJogador;
+  int contadorRodada = 1;
+  int numeroJogador, vitorias, derrotas;
 
   public void executarjogo(Socket socket) {
     try {
@@ -38,6 +39,7 @@ public class JogoVersusServidor {
           new InputStreamReader(inputStream)
         );
 
+        System.out.println("Rodada " + contadorRodada);
         System.out.println("*** Escolha PAR ou IMPAR ***");
         System.out.println("P - Par");
         System.out.println("I - Impar");
@@ -61,13 +63,14 @@ public class JogoVersusServidor {
 
             for (
               int linhasRecebidas = 0;
-              linhasRecebidas < 4;
+              linhasRecebidas < 5;
               linhasRecebidas++
             ) {
               String resposta = in.readLine();
               System.out.println(resposta);
             }
 
+            contadorRodada++;
             this.jogar(socket);
             break;
           case "I":
@@ -84,13 +87,14 @@ public class JogoVersusServidor {
 
             for (
               int linhasRecebidas = 0;
-              linhasRecebidas < 4;
+              linhasRecebidas < 5;
               linhasRecebidas++
             ) {
               String resposta = in.readLine();
               System.out.println(resposta);
             }
 
+            contadorRodada++;
             this.jogar(socket);
             break;
           case "RETORNAR":
@@ -101,6 +105,8 @@ public class JogoVersusServidor {
             );
             break;
         }
+
+        
       } while (!mensagem.equalsIgnoreCase("RETORNAR"));
     } catch (Exception e) {
       System.out.println("Erro ao executar o menu...");

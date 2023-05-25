@@ -11,7 +11,7 @@ public class JogoServidor {
   Scanner scanner;
   PrintWriter printWriter;
   String msg = "";
-  int numeroServer, somaNumeros, numeroClient;
+  int numeroServer, somaNumeros, numeroClient, vitorias, derrotas;
 
   public JogoServidor(Socket client) {
     this.client = client;
@@ -36,10 +36,15 @@ public class JogoServidor {
           this.mostrarNumeros(numeroClient, numeroServer, somaNumeros);
           
           if(somaNumeros % 2 == 0) {
+            vitorias++;
             printWriter.println("O jogador venceu");
+            printWriter.println("Você tem " + vitorias + " vitorias e " + derrotas + " derrotas");
             System.out.println("O jogador venceu");
+
           } else {
+            derrotas++;
             printWriter.println("O jogador perdeu");
+            printWriter.println("Você tem " + vitorias + " vitorias e " + derrotas + " derrotas");
             System.out.println("O jogador perdeu");
           }
 
@@ -53,16 +58,22 @@ public class JogoServidor {
           this.mostrarNumeros(numeroClient, numeroServer, somaNumeros);
 
           if(somaNumeros % 2 == 1) {
-            printWriter.println("O jogador venceu");
+            vitorias++;
+            printWriter.println("O jogador venceu");              
+            printWriter.println("Você tem " + vitorias + " vitorias e " + derrotas + " derrotas");          
             System.out.println("O jogador venceu");
           } else {
-            printWriter.println("O jogador perdeu");
+            derrotas++;
+            printWriter.println("O jogador perdeu");            
+            printWriter.println("Você tem " + vitorias + " vitorias e " + derrotas + " derrotas");
             System.out.println("O jogador perdeu");
           }
         }
 
         if(msg.equalsIgnoreCase("RETORNAR")) {
           System.out.println("Voltando ao menu inicial... ");
+          vitorias = 0;
+          derrotas = 0;
         }
       }
     } catch (Exception e) {
