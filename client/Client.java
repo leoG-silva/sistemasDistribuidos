@@ -12,6 +12,7 @@ public class Client {
     Scanner scanner, teclado;
     PrintWriter printWriter;
     String mensagem = "";
+    String nickname = "";
     final String HOST = "localhost";
     final int PORT = 54321;
 
@@ -26,10 +27,14 @@ public class Client {
       System.out.println("Carregamento concluído.\r\n");
       Thread.sleep(2000);
 
+      System.out.println("Informe seu nick");
+      nickname = teclado.nextLine();     
+      printWriter.println(nickname);
+
       System.out.println("* BEM VINDO AO JOGO DE PAR OU IMPAR *");
 
       do {
-        System.out.println("Escolha uma opção para seu jogo");
+        System.out.println(nickname + ", Escolha uma opção para seu jogo");
         System.out.println("1 - Jogador x Servidor");
         System.out.println("2 - Jogador x Jogador");
         System.out.println("S - Sair do jogo");
@@ -56,7 +61,7 @@ public class Client {
 
       try {
         System.out.println("Saindo do jogo....");
-        System.out.println("Fechando conexão");
+        System.out.println("Fechando Thread");
 
         scanner.close();
         teclado.close();

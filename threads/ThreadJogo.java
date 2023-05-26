@@ -12,6 +12,8 @@ public class ThreadJogo extends Thread {
   Scanner scanner;
   PrintWriter printWriter;
   String msg = "";
+  String nickname = "";
+
 
   public ThreadJogo(Socket client) {
     this.client = client;
@@ -36,19 +38,23 @@ public class ThreadJogo extends Thread {
       System.out.println("Jogo carregado. \r\n");
       Thread.sleep(2000);
 
+      nickname = scanner.nextLine();
+
+      System.out.println("O jogador " + nickname + " iniciou o jogo");
+
       while (!msg.equalsIgnoreCase("S")) {
         msg = scanner.nextLine();
         if (msg.equalsIgnoreCase("1")) {
-          System.out.println("O jogador escolheu a opção Jogador x Servidor");
-          RespostaJogoServidor jogoVsServidor = new RespostaJogoServidor(client);
+          System.out.println("O jogador " + nickname + " escolheu a opção Jogador x Servidor");
+          RespostaJogoServidor jogoVsServidor = new RespostaJogoServidor(client, nickname);
           jogoVsServidor.executarJogoVersusServidor();
         }
           if (msg.equalsIgnoreCase("2")) {
-          System.out.println("O jogador escolheu a opção Jogador x Jogador");
+          System.out.println("O jogador " + nickname + " escolheu a opção Jogador x Jogador");
         }
 
         if (msg.equalsIgnoreCase("S")){
-          System.out.println("O jogador escolheu sair do jogo...");
+          System.out.println("O jogador " + nickname + " escolheu sair do jogo...");
         }
       }
     } catch (Exception e) {

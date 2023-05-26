@@ -11,14 +11,16 @@ public class RespostaJogoServidor {
   Scanner scanner;
   PrintWriter printWriter;
   String msg = "";
+  String nickname = "";
   int numeroServer, somaNumeros, numeroClient, vitorias, derrotas, par, impar;
   
-  public RespostaJogoServidor(Socket client) {
+  public RespostaJogoServidor(Socket client, String nickname) {
     this.client = client;
+    this.nickname = nickname;
   }
 
   public void executarJogoVersusServidor() {
-    System.out.println("Jogador acessou a opção JOGADOR X SERVIDOR...");
+    System.out.println("O jogador " + nickname + " acessou a opção JOGADOR X SERVIDOR...");
 
     try {
       scanner = new Scanner(client.getInputStream());
@@ -28,14 +30,14 @@ public class RespostaJogoServidor {
         msg = scanner.nextLine();
 
         if (msg.equalsIgnoreCase("P")) {
-          System.out.println("O jogador escolheu a opção PAR");
+          System.out.println("O jogador " + nickname + " escolheu a opção PAR");
           numeroClient = scanner.nextInt();
           par = 0;
           mostrarResultado(numeroClient, par);
         }
 
         if (msg.equalsIgnoreCase("I")) {
-          System.out.println("O jogador escolheu a opção IMPAR");
+          System.out.println("O jogador " + nickname + " escolheu a opção IMPAR");
           numeroClient = scanner.nextInt();
           impar = 1;
           mostrarResultado(numeroClient, impar);
@@ -43,7 +45,7 @@ public class RespostaJogoServidor {
 
         if (msg.equalsIgnoreCase("R")) {
           printWriter.println("Você obteve " + vitorias + " vitorias e " + derrotas + " derrotas");
-          System.out.println("Voltando ao menu inicial... ");
+          System.out.println("O jogador " + nickname + " está voltando ao menu inicial... ");
           vitorias = 0;
           derrotas = 0;
         }
