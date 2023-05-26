@@ -1,12 +1,12 @@
-## Sistemas Distribuidos - Projeto A3 
+# Sistemas Distribuidos - Projeto A3 
 Trabalho de sistemas distribuidos 
 Universidade Anhembi Morumbi - Análise em Desenvolvimento de Sistemas - Mooca/Centro
 
-# Jogo de par ou impar em Java.
+## Jogo de par ou impar em Java.
 Jogador x Servidor
 Jogador x Jogador
 
-# Grupo
+## Grupo
 - Guilherme Buriola da Silva - RA: 125111359149
 - Gustavo Nascimento da Silva - RA: 125111343462
 - Leonardo Bandeira de Souza - RA: 125111357817
