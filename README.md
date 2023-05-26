@@ -1,7 +1,7 @@
-## sistemasDistribuidos
-- Trabalho de sistemas distribuidos - Projeto A3
-- Mooca/Centro - Universidade Anhembi Morumbi - ADS/semi-presencial
+## Sistemas Distribuidos - Projeto A3 
+Trabalho de sistemas distribuidos - Universidade Anhembi Morumbi - Mooca/Centro - ADS/semi-presencial
 
+# Grupo
 - Guilherme Buriola da Silva - RA: 125111359149
 - Gustavo Nascimento da Silva - RA: 125111343462
 - Leonardo Bandeira de Souza - RA: 125111357817
