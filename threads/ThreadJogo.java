@@ -21,9 +21,6 @@ public class ThreadJogo extends Thread {
   public void run() {
     //iniciando conexão
     try {
-      System.out.println(
-        "Conectado ao endereço " + client.getInetAddress().getHostAddress()
-      );
       System.out.println("\r\n Conectado a porta " + client.getLocalPort());
     } catch (Exception e) {
       System.out.println("Error on thread: " + e.getMessage());

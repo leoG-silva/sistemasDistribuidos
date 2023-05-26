@@ -13,7 +13,7 @@ public class Client {
     PrintWriter printWriter;
     String mensagem = "";
     final String HOST = "localhost";
-    final int PORT = 12345;
+    final int PORT = 54321;
 
     try {
       socket = new Socket(HOST, PORT);
