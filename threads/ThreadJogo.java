@@ -39,7 +39,7 @@ public class ThreadJogo extends Thread {
       System.out.println("Jogo carregado. \r\n");
       Thread.sleep(2000);
 
-      while (!msg.equalsIgnoreCase("Sair")) {
+      while (!msg.equalsIgnoreCase("S")) {
         msg = scanner.nextLine();
         if (msg.equalsIgnoreCase("1")) {
           System.out.println("O jogador escolheu a opção Jogador x Servidor");
