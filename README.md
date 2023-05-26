@@ -1,5 +1,10 @@
 ## Sistemas Distribuidos - Projeto A3 
-Trabalho de sistemas distribuidos - Universidade Anhembi Morumbi - Mooca/Centro - ADS/semi-presencial
+Trabalho de sistemas distribuidos 
+Universidade Anhembi Morumbi - Análise em Desenvolvimento de Sistemas - Mooca/Centro
+
+#Jogo de par ou impar em Java.
+Jogador x Servidor
+Jogador x Jogador
 
 # Grupo
 - Guilherme Buriola da Silva - RA: 125111359149
