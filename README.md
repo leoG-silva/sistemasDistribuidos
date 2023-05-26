@@ -2,7 +2,7 @@
 Trabalho de sistemas distribuidos 
 Universidade Anhembi Morumbi - Análise em Desenvolvimento de Sistemas - Mooca/Centro
 
-#Jogo de par ou impar em Java.
+# Jogo de par ou impar em Java.
 Jogador x Servidor
 Jogador x Jogador
 
