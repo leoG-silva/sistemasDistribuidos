@@ -3,7 +3,6 @@ package client;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
-
 import util.client.JogoVersusServidor;
 
 public class Client {
@@ -22,58 +21,41 @@ public class Client {
       scanner = new Scanner(socket.getInputStream());
       teclado = new Scanner(System.in);
 
-      try {
-        System.out.println("O jogo está sendo carregado...");
+      System.out.println("O jogo está sendo carregado...");
+      Thread.sleep(2000);
+      System.out.println("Carregamento concluído.\r\n");
+      Thread.sleep(2000);
 
-        try {
-          Thread.sleep(2000);
-        } catch (InterruptedException e) {}
+      System.out.println("* BEM VINDO AO JOGO DE PAR OU IMPAR *");
 
-        System.out.println("Carregamento concluído.\r\n");
+      do {
+        System.out.println("Escolha uma opção para seu jogo");
+        System.out.println("1 - Jogador x Servidor");
+        System.out.println("2 - Jogador x Jogador");
+        System.out.println("S - Sair do jogo");
 
-        try {
-          Thread.sleep(2000);
-        } catch (InterruptedException e) {}
+        mensagem = teclado.nextLine();
+        printWriter.println(mensagem);
 
-        do {
-          System.out.println("*** BEM VINDO AO JOGO DE PAR OU IMPAR ***");
-          System.out.println("Escolha uma opção para seu jogo");
-          System.out.println("1 - Jogador x Servidor");
-          System.out.println("2 - Jogador x Jogador");
-          System.out.println("Sair - Sair do jogo");
-
-          mensagem = teclado.nextLine();
-          printWriter.println(mensagem);
-
-          switch (mensagem.toUpperCase()) {
-            case "1":
-              JogoVersusServidor jogoVersusServidor = new JogoVersusServidor();
-              jogoVersusServidor.executarjogo(socket);
-              break;
-            case "2":
-              //return executarJogoVersusClient()
-              break;
-
-            case "SAIR":
-              break;
-
-            default:
-              System.out.println("Opção invalida... \r\n");
-
-              try {
-                Thread.sleep(2000);
-              } catch (InterruptedException e) {}
-
-              break;
-          }
-        } while (!mensagem.equalsIgnoreCase("SAIR"));
-      } catch (Exception e) {
-        System.out.println("Erro ao executar o menu do jogo...");
-      }
-
-      System.out.println("Saindo do jogo....");
+        switch (mensagem.toUpperCase()) {
+          case "1":
+            JogoVersusServidor jogoVersusServidor = new JogoVersusServidor();
+            jogoVersusServidor.executarjogo(socket);
+            break;
+          case "2":
+            //return executarJogoVersusClient()
+            break;
+          case "S":
+            break;
+          default:
+            System.out.println("Opção inválida... \r\n");
+            Thread.sleep(2000);
+            break;
+        }
+      } while (!mensagem.equalsIgnoreCase("S"));
 
       try {
+        System.out.println("Saindo do jogo....");
         System.out.println("Fechando conexão");
 
         scanner.close();
@@ -82,12 +64,10 @@ public class Client {
 
         System.out.println("Conexões fechadas.");
       } catch (Exception e) {
-        System.out.println("Erro ao fechar conexão");
+        System.out.println("Erro ao fechar conexão com o servidor...");
       }
-
-
     } catch (Exception e) {
-      System.out.println("Error ao bindar com o servidor: " + e.getMessage());
+      System.out.println("Erro ao conectar com o servidor: " + e.getMessage());
     }
   }
 }

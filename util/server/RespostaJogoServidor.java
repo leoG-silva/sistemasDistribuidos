@@ -41,7 +41,8 @@ public class RespostaJogoServidor {
           mostrarResultado(numeroClient, impar);
         }
 
-        if (msg.equalsIgnoreCase("RETORNAR")) {
+        if (msg.equalsIgnoreCase("R")) {
+          printWriter.println("Você obteve " + vitorias + " vitorias e " + derrotas + " derrotas");
           System.out.println("Voltando ao menu inicial... ");
           vitorias = 0;
           derrotas = 0;

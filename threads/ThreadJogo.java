@@ -19,6 +19,7 @@ public class ThreadJogo extends Thread {
 
   @Override
   public void run() {
+    //iniciando conexão
     try {
       System.out.println(
         "Conectado ao endereço " + client.getInetAddress().getHostAddress()
@@ -28,21 +29,15 @@ public class ThreadJogo extends Thread {
       System.out.println("Error on thread: " + e.getMessage());
     }
 
+    //rodando jogo
     try {
       scanner = new Scanner(client.getInputStream());
       printWriter = new PrintWriter(client.getOutputStream(), true);
 
       System.out.println("O servidor está sendo carregado...");
-
-      try {
-        Thread.sleep(2000);
-      } catch (InterruptedException e) {}
-
+      Thread.sleep(2000);
       System.out.println("Jogo carregado. \r\n");
-
-      try {
-        Thread.sleep(2000);
-      } catch (InterruptedException e) {}
+      Thread.sleep(2000);
 
       while (!msg.equalsIgnoreCase("Sair")) {
         msg = scanner.nextLine();
@@ -55,12 +50,12 @@ public class ThreadJogo extends Thread {
           System.out.println("O jogador escolheu a opção Jogador x Jogador");
         }
 
-        if (msg.equalsIgnoreCase("Sair")){
+        if (msg.equalsIgnoreCase("S")){
           System.out.println("O jogador escolheu sair do jogo...");
         }
       }
     } catch (Exception e) {
-      System.out.println("Erro na comunicação com o servidor");
+      System.out.println("Erro na comunicação com o cliente");
     }
 
     //etapa de encerramento
@@ -74,7 +69,7 @@ public class ThreadJogo extends Thread {
       printWriter.close();
       client.close();
     } catch (Exception e) {
-      System.out.println("Erro ao fechar as conexões");
+      System.out.println("Erro ao fechar a conexão com o cliente.");
     }
   }
 }

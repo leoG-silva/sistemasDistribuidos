@@ -29,21 +29,21 @@ public class JogoVersusServidor {
 
   public void jogar(Socket socket) {
     try {
+      scanner = new Scanner(socket.getInputStream());
+      teclado = new Scanner(System.in);
+      printWriter = new PrintWriter(socket.getOutputStream(), true);
+
+      InputStream inputStream = socket.getInputStream();
+      BufferedReader in = new BufferedReader(
+        new InputStreamReader(inputStream)
+      );
+
       do {
-        scanner = new Scanner(socket.getInputStream());
-        teclado = new Scanner(System.in);
-        printWriter = new PrintWriter(socket.getOutputStream(), true);
-
-        InputStream inputStream = socket.getInputStream();
-        BufferedReader in = new BufferedReader(
-          new InputStreamReader(inputStream)
-        );
-
         System.out.println("Rodada " + contadorRodada);
         System.out.println("*** Escolha PAR ou IMPAR ***");
         System.out.println("P - Par");
         System.out.println("I - Impar");
-        System.out.println("Retornar - Retornar ao menu principal");
+        System.out.println("R - Retornar ao menu principal");
 
         mensagem = teclado.nextLine();
         printWriter.println(mensagem);
@@ -53,22 +53,21 @@ public class JogoVersusServidor {
             executarRodada(in);
             this.jogar(socket);
             break;
-
           case "I":
             executarRodada(in);
             this.jogar(socket);
             break;
-
-          case "RETORNAR":
+          case "R":
+            String resultadoFinal = in.readLine();
+            System.out.println(resultadoFinal);
             break;
-
           default:
             System.out.println(
               "Nenhuma opção selecionada corretamente... \r\n"
             );
             break;
         }
-      } while (!mensagem.equalsIgnoreCase("RETORNAR"));
+      } while (!mensagem.equalsIgnoreCase("R"));
     } catch (Exception e) {
       System.out.println("Erro ao executar o menu...");
     }
