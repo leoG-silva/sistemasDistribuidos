@@ -4,7 +4,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-import util.server.JogoServidor;
+import util.server.RespostaJogoServidor;
 
 public class ThreadJogo extends Thread {
 
@@ -48,7 +48,7 @@ public class ThreadJogo extends Thread {
         msg = scanner.nextLine();
         if (msg.equalsIgnoreCase("1")) {
           System.out.println("O jogador escolheu a opção Jogador x Servidor");
-          JogoServidor jogoVsServidor = new JogoServidor(client);
+          RespostaJogoServidor jogoVsServidor = new RespostaJogoServidor(client);
           jogoVsServidor.executarJogoVersusServidor();
         }
           if (msg.equalsIgnoreCase("2")) {
@@ -69,7 +69,7 @@ public class ThreadJogo extends Thread {
         "Encerrando conexão com client " +
         client.getInetAddress().getHostAddress()
       );
-            
+
       scanner.close();
       printWriter.close();
       client.close();
