@@ -26,7 +26,7 @@ public class RespostaJogoServidor {
       scanner = new Scanner(client.getInputStream());
       printWriter = new PrintWriter(client.getOutputStream(), true);
 
-      while (!msg.equalsIgnoreCase("Retornar")) {
+      while (!msg.equalsIgnoreCase("R")) {
         msg = scanner.nextLine();
 
         if (msg.equalsIgnoreCase("P")) {
