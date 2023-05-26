@@ -68,7 +68,8 @@ public class ThreadJogo extends Thread {
       System.out.println(
         "Encerrando conexão com client " +
         client.getInetAddress().getHostAddress()
-      );      
+      );
+            
       scanner.close();
       printWriter.close();
       client.close();

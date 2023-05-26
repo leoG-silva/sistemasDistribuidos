@@ -50,66 +50,49 @@ public class JogoVersusServidor {
 
         switch (mensagem.toUpperCase()) {
           case "P":
-            System.out.print("Digite um número de 0 à 5: ");
-            numeroJogador = teclado.nextInt();
-            printWriter.println(numeroJogador);
-
-            if (numeroJogador < 0 || numeroJogador > 5) {
-              System.out.println(
-                "Numero inválido, aguarde para jogar novamente..."
-              );
-              this.jogar(socket);
-            }
-
-            for (
-              int linhasRecebidas = 0;
-              linhasRecebidas < 5;
-              linhasRecebidas++
-            ) {
-              String resposta = in.readLine();
-              System.out.println(resposta);
-            }
-
-            contadorRodada++;
+            executarRodada(in);
             this.jogar(socket);
             break;
+
           case "I":
-            System.out.print("Digite um número de 0 à 5: ");
-            numeroJogador = teclado.nextInt();
-            printWriter.println(numeroJogador);
-
-            if (numeroJogador < 0 || numeroJogador > 5) {
-              System.out.println(
-                "Numero inválido, aguarde para jogar novamente..."
-              );
-              this.jogar(socket);
-            }
-
-            for (
-              int linhasRecebidas = 0;
-              linhasRecebidas < 5;
-              linhasRecebidas++
-            ) {
-              String resposta = in.readLine();
-              System.out.println(resposta);
-            }
-
-            contadorRodada++;
+            executarRodada(in);
             this.jogar(socket);
             break;
+
           case "RETORNAR":
             break;
+
           default:
             System.out.println(
               "Nenhuma opção selecionada corretamente... \r\n"
             );
             break;
         }
-
-        
       } while (!mensagem.equalsIgnoreCase("RETORNAR"));
     } catch (Exception e) {
       System.out.println("Erro ao executar o menu...");
     }
+  }
+
+  public void executarRodada(BufferedReader in) {
+    System.out.print("Digite um número de 0 à 5: ");
+    numeroJogador = teclado.nextInt();
+    printWriter.println(numeroJogador);
+
+    if (numeroJogador < 0 || numeroJogador > 5) {
+      System.out.println("Numero inválido, aguarde para jogar novamente...");
+      this.jogar(socket);
+    }
+
+    try {
+      for (int linhasRecebidas = 0; linhasRecebidas < 5; linhasRecebidas++) {
+        String resposta = in.readLine();
+        System.out.println(resposta);
+      }
+    } catch (Exception e) {
+      System.out.println("Erro ao retornar resultados do servidor...");
+    }
+
+    contadorRodada++;
   }
 }
