@@ -11,9 +11,7 @@ public class ThreadJogo extends Thread {
   private Socket client;
   Scanner scanner;
   PrintWriter printWriter;
-  String msg = "";
-  String nickname = "";
-
+  String msg, nickname = "";
 
   public ThreadJogo(Socket client) {
     try {

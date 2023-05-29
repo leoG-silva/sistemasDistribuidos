@@ -12,8 +12,7 @@ public class JogoVersusServidor {
   Socket socket;
   Scanner scanner, teclado;
   PrintWriter printWriter;
-  String mensagem = "";
-  String resultadoJogo = "";
+  String mensagem, resultadoJogo = "";
   int contadorRodada = 1;
   int numeroJogador, vitorias, derrotas;
 

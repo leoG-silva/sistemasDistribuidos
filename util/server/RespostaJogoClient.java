@@ -7,54 +7,81 @@ import java.util.List;
 import java.util.Scanner;
 
 public class RespostaJogoClient implements Runnable {
-  private static final List<Socket> listaDeClientes = new ArrayList<>();
-  private Socket client;
+  private static final List<RespostaJogoClient> listaDeClientes = new ArrayList<>();
   Scanner scanner;
   PrintWriter printWriter;
-  String msgClient1 = "";
-  String msgClient2 = "";
-  String nickname = "";
-  private int numeroJogador = 10;
-  int numeroServer, somaNumeros, numeroClient, vitorias, derrotas, par, impar;
-  
+  String nickname, continuarJogando = "";
+  int numeroJogador, somaNumeros, vitorias, derrotas;
+  private boolean par, jogadaOponente, ehPar;
+
   public RespostaJogoClient(Socket client, String nickname) {
-      try {
-        this.client = client;
-        this.nickname = nickname;
-        scanner = new Scanner(client.getInputStream());
-        printWriter = new PrintWriter(client.getOutputStream(), true);
-      } catch (Exception e) {
-        System.out.println("Erro no construtor do respostaJogoClient");
-      }
+    try {
+      this.nickname = nickname;
+      scanner = new Scanner(client.getInputStream());
+      printWriter = new PrintWriter(client.getOutputStream(), true);
+    } catch (Exception e) {
+      System.out.println("Erro no construtor do respostaJogoClient");
+    }
   }
 
   @Override
   public void run() {
     try {
+      // jogador1 conectou
       System.out.println("O jogador " + nickname + " entrou na partida.");
-      listaDeClientes.add(client);
-      
-      int index = listaDeClientes.indexOf(client); 
-      Socket oponente;
+      listaDeClientes.add(this);
+
+      int index = listaDeClientes.indexOf(this);
+      RespostaJogoClient oponente;
+
+      // aguardando conexão jogador2 e selecionando oponente
       while (true) {
         System.out.println("");
-        if(listaDeClientes.size() % 2 == 0) {
+        if (listaDeClientes.size() % 2 == 0) {
           oponente = index % 2 == 0 ? listaDeClientes.get(index + 1) : listaDeClientes.get(index - 1);
+          break;
         }
       }
 
-      printWriter.println("O seu oponente é " + oponente);
-      //jogador1 conectou
-      //jogador2 conectou
-      //receber dado jogador1
+      printWriter.println(oponente.nickname);
+      listaDeClientes.get(0).par = true;
+      listaDeClientes.get(1).par = false;
 
-      //msgClient1 = scanner.nextLine();
-      //printWriter.println("Devolvendo mensagem");
-  
-      //receber dado jogador2
-      //verificar vencedor
+      if (par) {
+        printWriter.println("Você será o PAR!!!");
+      } else {
+        printWriter.println("Você será o IMPAR!!!");
+      }
+
+      verificarVencedor(oponente);
+
+      continuarJogando = scanner.nextLine();
+
+      scanner.close();
+      printWriter.close();
+      listaDeClientes.remove(0);
+      listaDeClientes.remove(1);
     } catch (Exception e) {
       System.out.println("erro");
     }
-  }    
+  }
+
+  public void verificarVencedor(RespostaJogoClient oponente) {
+    numeroJogador = Integer.parseInt(scanner.nextLine());
+    jogadaOponente = true;
+
+    while (true) {
+      System.out.println("");
+      if (oponente.jogadaOponente) {
+        break;
+      }
+    }
+
+    System.out.println(numeroJogador);
+    System.out.println(oponente.numeroJogador);
+
+    somaNumeros = numeroJogador + oponente.numeroJogador;
+    ehPar = somaNumeros % 2 == 0;
+    printWriter.println("O jogador " + (ehPar == par ? nickname : oponente.nickname) + " venceu");
+  }
 }

@@ -11,9 +11,7 @@ public class JogoVersusClient {
   Socket socket;
   Scanner scanner, teclado;
   PrintWriter printWriter;
-  String mensagemClient1 = "";
-  String mensagemClient2 = "";
-  String resultadoJogo = "";
+  String mensagemClient1, oponente, nickname, ehParOuImpar, retornar = "";
   int contadorRodada = 1;
   int numeroJogador, vitorias, derrotas;
 
@@ -22,34 +20,30 @@ public class JogoVersusClient {
       scanner = new Scanner(socket.getInputStream());
       teclado = new Scanner(System.in);
       printWriter = new PrintWriter(socket.getOutputStream(), true);
-      
+
       InputStream inputStream = socket.getInputStream();
       BufferedReader in = new BufferedReader(
-        new InputStreamReader(inputStream)
-      );
+          new InputStreamReader(inputStream));
 
-      System.out.println("Client1, escolher par ou impar");
-      mensagemClient1 = teclado.nextLine();
-      printWriter.println(mensagemClient1);
+      System.out.println("Aguardando jogador...");
+      oponente = in.readLine();
+      System.out.println("Seu oponente: " + oponente + "!");
+
+      ehParOuImpar = in.readLine();
+
+        System.out.println(ehParOuImpar);
+
+        System.out.print("Digite um número de 0 à 5: ");
+        numeroJogador = teclado.nextInt();
+        printWriter.println(numeroJogador);
+
+        if (numeroJogador < 0 || numeroJogador > 5) {
+          System.out.println("Numero inválido, aguarde para jogar novamente...");
+        }
+
+        String respostaJogo = in.readLine();
+        System.out.println(respostaJogo);
       
-      String resposta = in.readLine();
-      System.out.println(resposta); 
-      
-      System.out.println("Client2, escolher par ou impar");
-      mensagemClient2 = teclado.nextLine();
-      printWriter.println(mensagemClient2);
-
-      String resposta2 = in.readLine();
-      System.out.println(resposta2);
-        
-
-      //conectar com outro jogador
-      //escolher o player1 e player2 (pode ser por ordem de acesso ao jogo)
-      //iniciar jogo
-        //questionar jogada do jogador1 e guardar dado
-        //questionar jogada do jogador2 e guardar dado
-        //mostrar resultados na tela
-
     } catch (Exception e) {
       System.out.println("Erro ao executar o jogo versus outro client");
     }
