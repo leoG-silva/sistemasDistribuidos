@@ -10,7 +10,8 @@ public class RespostaJogoClient implements Runnable {
   private static final List<RespostaJogoClient> listaDeClientes = new ArrayList<>();
   Scanner scanner;
   PrintWriter printWriter;
-  String nickname, continuarJogando = "";
+  String nickname = "";
+  String continuarJogando = "";
   int numeroJogador, somaNumeros, vitorias, derrotas;
   private boolean par, jogadaOponente, ehPar;
 
@@ -55,14 +56,11 @@ public class RespostaJogoClient implements Runnable {
 
       verificarVencedor(oponente);
 
-      continuarJogando = scanner.nextLine();
-
-      scanner.close();
-      printWriter.close();
-      listaDeClientes.remove(0);
-      listaDeClientes.remove(1);
+      System.out.println(nickname + " Saiu");
+      listaDeClientes.remove(this);
+      
     } catch (Exception e) {
-      System.out.println("erro");
+      System.out.println("Erro ao executar jogo contra outro Client");
     }
   }
 
@@ -77,11 +75,15 @@ public class RespostaJogoClient implements Runnable {
       }
     }
 
-    System.out.println(numeroJogador);
-    System.out.println(oponente.numeroJogador);
+    System.out.println(nickname + " jogou " + numeroJogador);
+    System.out.println(oponente.nickname + " jogou " + oponente.numeroJogador);
+    System.out.println("Somando valores....");
 
     somaNumeros = numeroJogador + oponente.numeroJogador;
     ehPar = somaNumeros % 2 == 0;
+    
+    printWriter.println("O jogador " + nickname + " jogou numero " + numeroJogador);
+    printWriter.println("O jogador " + oponente.nickname + " jogou numero " + oponente.numeroJogador);
     printWriter.println("O jogador " + (ehPar == par ? nickname : oponente.nickname) + " venceu");
   }
 }

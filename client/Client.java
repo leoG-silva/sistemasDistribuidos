@@ -13,7 +13,8 @@ public class Client {
     Socket socket;
     Scanner scanner, teclado;
     PrintWriter printWriter;
-    String mensagem, nickname = "";
+    String mensagem = "";
+    String nickname = "";
     final String HOST = "localhost";
     final int PORT = 54321;
 

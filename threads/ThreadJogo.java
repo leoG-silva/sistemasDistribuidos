@@ -11,7 +11,8 @@ public class ThreadJogo extends Thread {
   private Socket client;
   Scanner scanner;
   PrintWriter printWriter;
-  String msg, nickname = "";
+  String nickname = "";
+  String msg = "";
 
   public ThreadJogo(Socket client) {
     try {
@@ -19,7 +20,7 @@ public class ThreadJogo extends Thread {
       scanner = new Scanner(client.getInputStream());
       printWriter = new PrintWriter(client.getOutputStream(), true);
     } catch (Exception e) {
-      System.out.println("Erro no construtros do ThreadJogo");
+      System.out.println("Erro no contrutores do ThreadJogo");
     }
 
   }

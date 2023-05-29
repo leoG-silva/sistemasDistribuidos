@@ -10,7 +10,8 @@ public class RespostaJogoServidor {
   private Socket client;
   Scanner scanner;
   PrintWriter printWriter;
-  String msg, nickname = "";
+  String msg = "";
+  String nickname = "";
   int numeroServer, somaNumeros, numeroClient, vitorias, derrotas, par, impar;
   
   public RespostaJogoServidor(Socket client, String nickname) {
