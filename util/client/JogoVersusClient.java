@@ -27,7 +27,7 @@ public class JogoVersusClient {
 
       System.out.println("Aguardando jogador...");
       String oponente = in.readLine();
-      System.out.println("Seu oponente: " + oponente + "!");
+      System.out.println("Seu oponente: *" + oponente + "*!");
 
       ehParOuImpar = in.readLine();
 

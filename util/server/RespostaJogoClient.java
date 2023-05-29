@@ -29,7 +29,7 @@ public class RespostaJogoClient implements Runnable {
   public void run() {
     try {
       // jogador1 conectou
-      System.out.println("O jogador " + nickname + " entrou na partida.");
+      System.out.println("O jogador *" + nickname + "* entrou na partida.");
       listaDeClientes.add(this);
 
       int index = listaDeClientes.indexOf(this);
@@ -82,8 +82,8 @@ public class RespostaJogoClient implements Runnable {
     somaNumeros = numeroJogador + oponente.numeroJogador;
     ehPar = somaNumeros % 2 == 0;
     
-    printWriter.println("O jogador " + nickname + " jogou numero " + numeroJogador);
-    printWriter.println("O jogador " + oponente.nickname + " jogou numero " + oponente.numeroJogador);
-    printWriter.println("O jogador " + (ehPar == par ? nickname : oponente.nickname) + " venceu");
+    printWriter.println("O jogador *" + nickname + "* jogou numero " + numeroJogador);
+    printWriter.println("O jogador *" + oponente.nickname + "* jogou numero " + oponente.numeroJogador);
+    printWriter.println("O jogador *" + (ehPar == par ? nickname : oponente.nickname) + "* venceu");
   }
 }
