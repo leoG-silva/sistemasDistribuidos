@@ -12,9 +12,8 @@ public class RespostaJogoClient implements Runnable {
   PrintWriter printWriter;
   String nickname = "";
   String continuarJogando = "";
-  String loopJogo = "";
-  int numeroJogador, somaNumeros, vitorias, derrotas;
-  private boolean par, jogadaOponente, ehPar;
+  int numeroJogador, somaNumeros, vitorias, derrotas, respostaLoop;
+  private boolean par, jogadaOponente, ehPar, recebiMsgLoop, loop;
 
   public RespostaJogoClient(Socket client, String nickname) {
     try {
@@ -29,14 +28,12 @@ public class RespostaJogoClient implements Runnable {
   @Override
   public void run() {
     try {
-      // jogador1 conectou
       System.out.println("O jogador *" + nickname + "* entrou na partida.");
       listaDeClientes.add(this);
 
       int index = listaDeClientes.indexOf(this);
       RespostaJogoClient oponente;
 
-      // aguardando conexão jogador2 e selecionando oponente
       while (true) {
         System.out.println("");
         if (listaDeClientes.size() % 2 == 0) {
@@ -49,49 +46,58 @@ public class RespostaJogoClient implements Runnable {
       listaDeClientes.get(0).par = true;
       listaDeClientes.get(1).par = false;
 
-      if (par) {
-        printWriter.println("Você será o PAR!!!");
-      } else {
-        printWriter.println("Você será o IMPAR!!!");
-      }
+      do {
+        if (par) {
+          printWriter.println("Você será o PAR!!!");
+        } else {
+          printWriter.println("Você será o IMPAR!!!");
+        }
 
-      // while (!loopJogo.equalsIgnoreCase("N")) {
-        verificarVencedor(oponente);
+        numeroJogador = Integer.parseInt(scanner.nextLine());
+        jogadaOponente = true;
 
-        // loopJogo = scanner.nextLine();
+        while (true) {
+          System.out.println("");
+          if (oponente.jogadaOponente) {
+            break;
+          }
+        }
 
-        // while (true) {
-        //   if (loopJogo.equalsIgnoreCase("N"))
-            System.out.println(nickname + " Saiu");
-            listaDeClientes.remove(this);
-          // break;
-        // }
-      // }
+        System.out.println(nickname + " jogou " + numeroJogador);
+        System.out.println(oponente.nickname + " jogou " + oponente.numeroJogador);
+        System.out.println("Somando valores....");
+
+        somaNumeros = numeroJogador + oponente.numeroJogador;
+        ehPar = somaNumeros % 2 == 0;
+
+        printWriter.println("O jogador *" + nickname + "* jogou numero " + numeroJogador);
+        printWriter.println("O jogador *" + oponente.nickname + "* jogou numero " + oponente.numeroJogador);
+        printWriter.println("O jogador *" + (ehPar == par ? nickname : oponente.nickname) + "* venceu");
+
+        respostaLoop = scanner.nextInt();
+        recebiMsgLoop = true;
+        loop = true;
+
+        while (true) {
+          System.out.println(respostaLoop);
+          if (oponente.recebiMsgLoop) {
+            break;
+          }
+        }
+
+        if (respostaLoop == 2 || oponente.respostaLoop == 2) {
+          loop = false;
+        } 
+
+        printWriter.println(loop);
+
+      } while (loop);
+
+      System.out.println(nickname + " Saiu");
+      listaDeClientes.remove(this);
+
     } catch (Exception e) {
       System.out.println("Erro ao executar jogo contra outro Client");
     }
-  }
-
-  public void verificarVencedor(RespostaJogoClient oponente) {
-    numeroJogador = Integer.parseInt(scanner.nextLine());
-    jogadaOponente = true;
-
-    while (true) {
-      System.out.println("");
-      if (oponente.jogadaOponente) {
-        break;
-      }
-    }
-
-    System.out.println(nickname + " jogou " + numeroJogador);
-    System.out.println(oponente.nickname + " jogou " + oponente.numeroJogador);
-    System.out.println("Somando valores....");
-
-    somaNumeros = numeroJogador + oponente.numeroJogador;
-    ehPar = somaNumeros % 2 == 0;
-
-    printWriter.println("O jogador *" + nickname + "* jogou numero " + numeroJogador);
-    printWriter.println("O jogador *" + oponente.nickname + "* jogou numero " + oponente.numeroJogador);
-    printWriter.println("O jogador *" + (ehPar == par ? nickname : oponente.nickname) + "* venceu");
   }
 }
