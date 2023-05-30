@@ -55,18 +55,18 @@ public class RespostaJogoClient implements Runnable {
         printWriter.println("Você será o IMPAR!!!");
       }
 
-      while (!loopJogo.equalsIgnoreCase("N")) {
+      // while (!loopJogo.equalsIgnoreCase("N")) {
         verificarVencedor(oponente);
 
-        loopJogo = scanner.nextLine();
+        // loopJogo = scanner.nextLine();
 
-        while (true) {
-          if (loopJogo.equalsIgnoreCase("N"))
+        // while (true) {
+        //   if (loopJogo.equalsIgnoreCase("N"))
             System.out.println(nickname + " Saiu");
-          listaDeClientes.remove(this);
-          break;
-        }
-      }
+            listaDeClientes.remove(this);
+          // break;
+        // }
+      // }
     } catch (Exception e) {
       System.out.println("Erro ao executar jogo contra outro Client");
     }

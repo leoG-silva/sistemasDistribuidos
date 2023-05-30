@@ -55,12 +55,12 @@ public class JogoVersusClient {
         System.out.println("Erro ao retornar resultados do servidor...");
       }
 
-      System.out.println("Deseja jogar novamente?");
-      System.out.println("S - Sim");
-      System.out.println("N - Não");
+      // System.out.println("Deseja jogar novamente?");
+      // System.out.println("S - Sim");
+      // System.out.println("N - Não");
 
-      loopJogo = teclado.nextLine();
-      printWriter.println(loopJogo);
+      // loopJogo = teclado.nextLine();
+      // printWriter.println(loopJogo);
 
     } catch (Exception e) {
       System.out.println("Erro ao executar o jogo versus outro client");
