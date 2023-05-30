@@ -12,6 +12,7 @@ public class RespostaJogoClient implements Runnable {
   PrintWriter printWriter;
   String nickname = "";
   String continuarJogando = "";
+  String loopJogo = "";
   int numeroJogador, somaNumeros, vitorias, derrotas;
   private boolean par, jogadaOponente, ehPar;
 
@@ -54,11 +55,18 @@ public class RespostaJogoClient implements Runnable {
         printWriter.println("Você será o IMPAR!!!");
       }
 
-      verificarVencedor(oponente);
+      while (!loopJogo.equalsIgnoreCase("N")) {
+        verificarVencedor(oponente);
 
-      System.out.println(nickname + " Saiu");
-      listaDeClientes.remove(this);
-      
+        loopJogo = scanner.nextLine();
+
+        while (true) {
+          if (loopJogo.equalsIgnoreCase("N"))
+            System.out.println(nickname + " Saiu");
+          listaDeClientes.remove(this);
+          break;
+        }
+      }
     } catch (Exception e) {
       System.out.println("Erro ao executar jogo contra outro Client");
     }
@@ -81,7 +89,7 @@ public class RespostaJogoClient implements Runnable {
 
     somaNumeros = numeroJogador + oponente.numeroJogador;
     ehPar = somaNumeros % 2 == 0;
-    
+
     printWriter.println("O jogador *" + nickname + "* jogou numero " + numeroJogador);
     printWriter.println("O jogador *" + oponente.nickname + "* jogou numero " + oponente.numeroJogador);
     printWriter.println("O jogador *" + (ehPar == par ? nickname : oponente.nickname) + "* venceu");

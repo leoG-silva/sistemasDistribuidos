@@ -11,7 +11,9 @@ public class JogoVersusClient {
   Socket socket;
   Scanner scanner, teclado;
   PrintWriter printWriter;
-  String nickname, ehParOuImpar = "";
+  String nickname = "";
+  String ehParOuImpar = "";
+  String loopJogo = "";
   int contadorRodada = 1;
   int numeroJogador, vitorias, derrotas;
 
@@ -33,13 +35,16 @@ public class JogoVersusClient {
 
       System.out.println(ehParOuImpar);
 
-      System.out.print("Digite um número de 0 à 5: ");
-      numeroJogador = teclado.nextInt();
-      printWriter.println(numeroJogador);
+      do {
+        System.out.print("Digite um número de 0 à 5: ");
+        numeroJogador = teclado.nextInt();
 
-      if (numeroJogador < 0 || numeroJogador > 5) {
-        System.out.println("Numero inválido, aguarde para jogar novamente...");
-      }
+        if (numeroJogador < 0 || numeroJogador > 5) {
+          System.out.println("Numero inválido, aguarde para jogar novamente...");
+        }
+      } while (numeroJogador < 0 || numeroJogador > 5);
+
+      printWriter.println(numeroJogador);
 
       try {
         for (int linhasRecebidas = 0; linhasRecebidas < 3; linhasRecebidas++) {
@@ -49,6 +54,13 @@ public class JogoVersusClient {
       } catch (Exception e) {
         System.out.println("Erro ao retornar resultados do servidor...");
       }
+
+      System.out.println("Deseja jogar novamente?");
+      System.out.println("S - Sim");
+      System.out.println("N - Não");
+
+      loopJogo = teclado.nextLine();
+      printWriter.println(loopJogo);
 
     } catch (Exception e) {
       System.out.println("Erro ao executar o jogo versus outro client");
