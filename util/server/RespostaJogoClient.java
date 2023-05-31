@@ -69,16 +69,12 @@ public class RespostaJogoClient implements Runnable {
           }
         }
 
-        System.out.println(nickname + " jogou " + numeroJogador);
-        System.out.println(oponente.nickname + " jogou " + oponente.numeroJogador);
-        System.out.println("Somando valores....");
+        exibirResultado(oponente);
 
         somaNumeros = numeroJogador + oponente.numeroJogador;
         ehPar = somaNumeros % 2 == 0;
 
-        printWriter.println("O jogador *" + nickname + "* jogou numero " + numeroJogador);
-        printWriter.println("O jogador *" + oponente.nickname + "* jogou numero " + oponente.numeroJogador);
-        printWriter.println("O jogador *" + (ehPar == par ? nickname : oponente.nickname) + "* venceu");
+        devolverResultadosClient(oponente);
 
         respostaLoop = scanner.nextInt();
         recebiMsgLoop = true;
@@ -114,5 +110,17 @@ public class RespostaJogoClient implements Runnable {
       System.out.println(e.getMessage());
       e.printStackTrace();
     }
+  }
+
+  public void exibirResultado(RespostaJogoClient oponente) {
+    System.out.println(nickname + " jogou " + numeroJogador);
+    System.out.println(oponente.nickname + " jogou " + oponente.numeroJogador);
+    System.out.println("Somando valores....");
+  }
+
+  public void devolverResultadosClient(RespostaJogoClient oponente) {
+    printWriter.println("O jogador *" + nickname + "* jogou numero " + numeroJogador);
+    printWriter.println("O jogador *" + oponente.nickname + "* jogou numero " + oponente.numeroJogador);
+    printWriter.println("O jogador *" + (ehPar == par ? nickname : oponente.nickname) + "* venceu");
   }
 }
