@@ -14,7 +14,7 @@ public class JogoVersusClient {
   String nickname = "";
   String ehParOuImpar = "";
   int contadorRodada = 1;
-  int numeroJogador, vitorias, derrotas, respostaLoop;
+  int numeroJogador, respostaLoop;
   Boolean loopJogo;
 
   public void jogar(Socket socket) {

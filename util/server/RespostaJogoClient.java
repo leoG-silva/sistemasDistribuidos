@@ -11,8 +11,7 @@ public class RespostaJogoClient implements Runnable {
   Scanner scanner;
   PrintWriter printWriter;
   String nickname = "";
-  String continuarJogando = "";
-  int numeroJogador, somaNumeros, vitorias, derrotas, respostaLoop;
+  int numeroJogador, somaNumeros, respostaLoop;
   private boolean par, jogadaOponente, ehPar, recebiMsgLoop, loop;
 
   public RespostaJogoClient(Socket client, String nickname) {
