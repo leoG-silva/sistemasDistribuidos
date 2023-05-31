@@ -3,6 +3,8 @@ package client;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
+
+import util.client.JogoVersusClient;
 import util.client.JogoVersusServidor;
 
 public class Client {
@@ -48,7 +50,8 @@ public class Client {
             jogoVersusServidor.executarjogo(socket);
             break;
           case "2":
-            //return executarJogoVersusClient()
+            JogoVersusClient jogoVersusClient = new JogoVersusClient();
+            jogoVersusClient.jogar(socket);
             break;
           case "S":
             break;

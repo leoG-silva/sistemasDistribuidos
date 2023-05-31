@@ -3,7 +3,7 @@ package threads;
 import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
-
+import util.server.RespostaJogoClient;
 import util.server.RespostaJogoServidor;
 
 public class ThreadJogo extends Thread {
@@ -11,12 +11,18 @@ public class ThreadJogo extends Thread {
   private Socket client;
   Scanner scanner;
   PrintWriter printWriter;
-  String msg = "";
   String nickname = "";
-
+  String msg = "";
 
   public ThreadJogo(Socket client) {
-    this.client = client;
+    try {
+      this.client = client;
+      scanner = new Scanner(client.getInputStream());
+      printWriter = new PrintWriter(client.getOutputStream(), true);
+    } catch (Exception e) {
+      System.out.println("Erro no contrutores do ThreadJogo");
+    }
+
   }
 
   @Override
@@ -28,11 +34,8 @@ public class ThreadJogo extends Thread {
       System.out.println("Error on thread: " + e.getMessage());
     }
 
-    //rodando jogo
+    //iniciando jogo
     try {
-      scanner = new Scanner(client.getInputStream());
-      printWriter = new PrintWriter(client.getOutputStream(), true);
-
       System.out.println("O servidor está sendo carregado...");
       Thread.sleep(2000);
       System.out.println("Jogo carregado. \r\n");
@@ -51,6 +54,9 @@ public class ThreadJogo extends Thread {
         }
           if (msg.equalsIgnoreCase("2")) {
           System.out.println("O jogador " + nickname + " escolheu a opção Jogador x Jogador");
+
+          RespostaJogoClient jogoVsClient = new RespostaJogoClient(client, nickname);
+          jogoVsClient.run();
         }
 
         if (msg.equalsIgnoreCase("S")){

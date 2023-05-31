@@ -12,8 +12,8 @@ public class JogoVersusServidor {
   Socket socket;
   Scanner scanner, teclado;
   PrintWriter printWriter;
-  String mensagem = "";
   String resultadoJogo = "";
+  String mensagem = "";
   int contadorRodada = 1;
   int numeroJogador, vitorias, derrotas;
 
@@ -35,8 +35,7 @@ public class JogoVersusServidor {
 
       InputStream inputStream = socket.getInputStream();
       BufferedReader in = new BufferedReader(
-        new InputStreamReader(inputStream)
-      );
+          new InputStreamReader(inputStream));
 
       do {
         System.out.println("Rodada " + contadorRodada);
@@ -63,8 +62,7 @@ public class JogoVersusServidor {
             break;
           default:
             System.out.println(
-              "Nenhuma opção selecionada corretamente... \r\n"
-            );
+                "Nenhuma opção selecionada corretamente... \r\n");
             break;
         }
       } while (!mensagem.equalsIgnoreCase("R"));
