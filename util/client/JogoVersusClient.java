@@ -7,8 +7,6 @@ import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.Scanner;
 
-import util.server.RespostaJogoClient;
-
 public class JogoVersusClient {
   Socket socket;
   Scanner scanner, teclado;
@@ -33,11 +31,12 @@ public class JogoVersusClient {
       String oponente = in.readLine();
       System.out.println("Seu oponente: *" + oponente + "*!");
 
-      ehParOuImpar = in.readLine();
-
-      System.out.println(ehParOuImpar);
-
       do {
+        System.out.println("RODADA " + contadorRodada);
+        ehParOuImpar = in.readLine();
+
+        System.out.println(ehParOuImpar);
+
         do {
           System.out.print("Digite um número de 0 à 5: ");
           numeroJogador = teclado.nextInt();
@@ -50,7 +49,7 @@ public class JogoVersusClient {
         printWriter.println(numeroJogador);
 
         try {
-          for (int linhasRecebidas = 0; linhasRecebidas < 2; linhasRecebidas++) {
+          for (int linhasRecebidas = 0; linhasRecebidas < 3; linhasRecebidas++) {
             String respostaJogo = in.readLine();
             System.out.println(respostaJogo);
           }
@@ -65,7 +64,11 @@ public class JogoVersusClient {
         respostaLoop = teclado.nextInt();
         printWriter.println(respostaLoop);
 
-        System.out.println(loopJogo);
+        loopJogo = Boolean.parseBoolean(in.readLine());
+
+        numeroJogador = 0;
+        ehParOuImpar = "";
+        contadorRodada++;
 
       } while (loopJogo);
 

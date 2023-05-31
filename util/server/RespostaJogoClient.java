@@ -47,13 +47,20 @@ public class RespostaJogoClient implements Runnable {
       listaDeClientes.get(1).par = false;
 
       do {
+        System.out.println("");
         if (par) {
           printWriter.println("Você será o PAR!!!");
         } else {
           printWriter.println("Você será o IMPAR!!!");
         }
-
-        numeroJogador = Integer.parseInt(scanner.nextLine());
+        
+        String strNumeroJogador = scanner.nextLine();
+        //numeroJogador = Integer.parseInt(scanner.nextLine());
+        while(strNumeroJogador.isEmpty()) {
+          strNumeroJogador = scanner.nextLine();
+        }
+        
+        numeroJogador = Integer.parseInt(strNumeroJogador);
         jogadaOponente = true;
 
         while (true) {
@@ -91,6 +98,12 @@ public class RespostaJogoClient implements Runnable {
 
         printWriter.println(loop);
 
+        oponente.recebiMsgLoop = false;
+        numeroJogador = 0;
+        somaNumeros = 0;
+        jogadaOponente = false;
+        ehPar = false;
+
       } while (loop);
 
       System.out.println(nickname + " Saiu");
@@ -98,6 +111,9 @@ public class RespostaJogoClient implements Runnable {
 
     } catch (Exception e) {
       System.out.println("Erro ao executar jogo contra outro Client");
+      System.out.println(e.getStackTrace());
+      System.out.println(e.getMessage());
+      e.printStackTrace();
     }
   }
 }
