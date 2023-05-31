@@ -11,7 +11,7 @@ public class RespostaJogoClient implements Runnable {
   Scanner scanner;
   PrintWriter printWriter;
   String nickname = "";
-  int numeroJogador, somaNumeros, respostaLoop;
+  int numeroJogador, somaNumeros, respostaLoop, vitorias, contadorVitorias;
   private boolean par, jogadaOponente, ehPar, recebiMsgLoop, loop;
 
   public RespostaJogoClient(Socket client, String nickname) {
@@ -74,6 +74,10 @@ public class RespostaJogoClient implements Runnable {
         somaNumeros = numeroJogador + oponente.numeroJogador;
         ehPar = somaNumeros % 2 == 0;
 
+        if(ehPar == par) {
+          vitorias++;
+        } 
+
         devolverResultadosClient(oponente);
 
         respostaLoop = scanner.nextInt();
@@ -101,6 +105,7 @@ public class RespostaJogoClient implements Runnable {
 
       } while (loop);
 
+      printWriter.println("*** Você ganhou " + vitorias + " vitorias ***");
       System.out.println(nickname + " Saiu");
       listaDeClientes.remove(this);
 

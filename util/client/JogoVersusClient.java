@@ -13,6 +13,7 @@ public class JogoVersusClient {
   PrintWriter printWriter;
   String nickname = "";
   String ehParOuImpar = "";
+  String quantidadeVitorias = "";
   int contadorRodada = 1;
   int numeroJogador, respostaLoop;
   Boolean loopJogo;
@@ -72,7 +73,10 @@ public class JogoVersusClient {
 
       } while (loopJogo);
 
+
       System.out.println("Um dos jogadores não deseja mais jogar...");
+      quantidadeVitorias = in.readLine();
+      System.out.println(quantidadeVitorias);
       System.out.println("Voltando ao menu inicial...");
 
     } catch (Exception e) {
