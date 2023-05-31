@@ -54,7 +54,7 @@ public class RespostaJogoClient implements Runnable {
         }
         
         String strNumeroJogador = scanner.nextLine();
-        //numeroJogador = Integer.parseInt(scanner.nextLine());
+        
         while(strNumeroJogador.isEmpty()) {
           strNumeroJogador = scanner.nextLine();
         }
