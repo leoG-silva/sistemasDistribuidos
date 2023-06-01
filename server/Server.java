@@ -17,7 +17,7 @@ public class Server {
       server = new ServerSocket(porta);
       System.out.println("Servidor disponível na porta: " + porta);
     } catch (Exception e) {
-      System.out.println("Erro: " + e.getMessage());
+      System.out.println("Erro ao iniciar servidor: " + e.getMessage());
       return;
     }
 
@@ -29,13 +29,17 @@ public class Server {
 
         ThreadJogo jogo = new ThreadJogo(socket);
         jogo.start();
-      } catch (Exception e) {}
+      } catch (Exception e) {
+        System.out.println("Erro: " + e.getMessage());
+      }
     }
 
     try {
       System.out.println("Encerrando o servidor");
       socket.close();
       server.close();
-    } catch (Exception e) {}
+    } catch (Exception e) {
+      System.out.println("Erro ao encerrar servidor: " + e.getMessage());
+    }
   }
 }

@@ -55,7 +55,7 @@ public class JogoVersusClient {
             System.out.println(respostaJogo);
           }
         } catch (Exception e) {
-          System.out.println("Erro ao retornar resultados do servidor...");
+          System.out.println("Erro ao retornar resultados do jogo " + e.getMessage());
         }
 
         System.out.println("Deseja jogar novamente?");
@@ -73,14 +73,13 @@ public class JogoVersusClient {
 
       } while (loopJogo);
 
-
       System.out.println("Um dos jogadores não deseja mais jogar...");
       quantidadeVitorias = in.readLine();
       System.out.println(quantidadeVitorias);
       System.out.println("Voltando ao menu inicial...");
 
     } catch (Exception e) {
-      System.out.println("Erro ao executar o jogo versus outro client");
+      System.out.println("Erro ao executar o jogo vs client " + e.getMessage() );
     }
   }
 }

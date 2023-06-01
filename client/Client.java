@@ -72,7 +72,7 @@ public class Client {
 
         System.out.println("Conexões fechadas.");
       } catch (Exception e) {
-        System.out.println("Erro ao fechar conexão com o servidor...");
+        System.out.println("Erro ao fechar conexão com o servidor: " + e.getMessage());
       }
     } catch (Exception e) {
       System.out.println("Erro ao conectar com o servidor: " + e.getMessage());

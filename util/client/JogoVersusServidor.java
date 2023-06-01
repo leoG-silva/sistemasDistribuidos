@@ -67,7 +67,7 @@ public class JogoVersusServidor {
         }
       } while (!mensagem.equalsIgnoreCase("R"));
     } catch (Exception e) {
-      System.out.println("Erro ao executar o menu...");
+      System.out.println("Erro ao executar o menu: " + e.getMessage());
     }
   }
 
@@ -87,7 +87,7 @@ public class JogoVersusServidor {
         System.out.println(resposta);
       }
     } catch (Exception e) {
-      System.out.println("Erro ao retornar resultados do servidor...");
+      System.out.println("Erro ao retornar resultados do jogo vs servidor: " + e.getMessage());
     }
 
     contadorRodada++;

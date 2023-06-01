@@ -69,7 +69,7 @@ public class RespostaJogoClient implements Runnable {
           }
         }
 
-        exibirResultado(oponente);
+        exibirNumerosServer(oponente);
 
         somaNumeros = numeroJogador + oponente.numeroJogador;
         ehPar = somaNumeros % 2 == 0;
@@ -106,18 +106,15 @@ public class RespostaJogoClient implements Runnable {
       } while (loop);
 
       printWriter.println("*** Você ganhou " + vitorias + " vitorias ***");
-      System.out.println(nickname + " Saiu");
+      System.out.println(nickname + " saiu do jogo Jogador vs Jogador");
       listaDeClientes.remove(this);
 
     } catch (Exception e) {
-      System.out.println("Erro ao executar jogo contra outro Client");
-      System.out.println(e.getStackTrace());
-      System.out.println(e.getMessage());
-      e.printStackTrace();
+      System.out.println("Erro ao executar jogo vs outro client: " + e.getMessage());
     }
   }
 
-  public void exibirResultado(RespostaJogoClient oponente) {
+  public void exibirNumerosServer(RespostaJogoClient oponente) {
     System.out.println(nickname + " jogou " + numeroJogador);
     System.out.println(oponente.nickname + " jogou " + oponente.numeroJogador);
     System.out.println("Somando valores....");

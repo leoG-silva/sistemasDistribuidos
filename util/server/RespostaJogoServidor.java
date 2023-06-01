@@ -51,7 +51,7 @@ public class RespostaJogoServidor {
         }
       }
     } catch (Exception e) {
-      System.out.println("Erro na comunicação com o servidor");
+      System.out.println("Erro ao executar jogo vs servidor: " + e.getMessage());
     }
   }
 

@@ -27,14 +27,12 @@ public class ThreadJogo extends Thread {
 
   @Override
   public void run() {
-    //iniciando conexão
     try {
       System.out.println("\r\n Conectado a porta " + client.getLocalPort());
     } catch (Exception e) {
       System.out.println("Error on thread: " + e.getMessage());
     }
 
-    //iniciando jogo
     try {
       System.out.println("O servidor está sendo carregado...");
       Thread.sleep(2000);
@@ -64,10 +62,9 @@ public class ThreadJogo extends Thread {
         }
       }
     } catch (Exception e) {
-      System.out.println("Erro na comunicação com o cliente");
+      System.out.println("Erro na comunicação entre cliente com o menu principal: " + e.getMessage());
     }
 
-    //etapa de encerramento
     try {
       System.out.println(
         "Encerrando conexão com client " +
@@ -78,7 +75,7 @@ public class ThreadJogo extends Thread {
       printWriter.close();
       client.close();
     } catch (Exception e) {
-      System.out.println("Erro ao fechar a conexão com o cliente.");
+      System.out.println("Erro ao fechar a conexão com o cliente: " + e.getMessage());
     }
   }
 }
